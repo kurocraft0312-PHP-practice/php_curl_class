@@ -3,7 +3,9 @@ require_once('check/check.php');
 
 // HTMLをパースする：https://pulogu.net/blog/020-computer/php/php-xml-data-read-parse-test/
 $sURL = simplexml_load_file("https://news.yahoo.co.jp/rss/topics/it.xml");
-var_test($sURL);
+echo $sURL->channel[0]->description;
+
+// var_test($sURL);
 
 
 $conn = curl_init();
