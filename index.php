@@ -19,6 +19,12 @@ $ret = curl_exec($conn);
 // $RSSinfo = curl_getinfo($conn); // HTTP情報を仮で取得
 curl_close($conn);
 
+// TODO:XPathで動作テストする
+$domDocument = new DOMDocument();
+$html_src = mb_convert_encoding($ret,"HTML-ENTITIES","auto");
+@$domDocument->loadHTML($html_src);
+// $xpath 
+
 // var_test($RSSinfo);
 
 // simplexml_load_string: XML文字列をオブジェクトに代入する
