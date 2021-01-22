@@ -1,14 +1,16 @@
 <?php
 require_once('check/check.php');
 
-// HTMLをパースする：https://pulogu.net/blog/020-computer/php/php-xml-data-read-parse-test/
-$sURL = simplexml_load_file("https://news.yahoo.co.jp/rss/topics/it.xml");
-echo $sURL->channel[0]->description;
+// var_test($sURL);
+// echo $sURL->channel[0]->description;
 
 // var_test($sURL);
 
-
 $conn = curl_init();
+
+// HTMLをパースする：https://pulogu.net/blog/020-computer/php/php-xml-data-read-parse-test/
+$sURL = simplexml_load_file("https://news.yahoo.co.jp/rss/topics/it.xml");
+
 // var_test($conn);
 curl_setopt($conn,CURLOPT_URL,$sURL);
 curl_setopt($conn,CURLOPT_RETURNTRANSFER,true);
@@ -20,15 +22,19 @@ $ret = curl_exec($conn);
 curl_close($conn);
 
 // TODO:XPathで動作テストする
-$domDocument = new DOMDocument();
-$html_src = mb_convert_encoding($ret,"HTML-ENTITIES","auto");
-@$domDocument->loadHTML($html_src);
+// $domDocument = new DOMDocument();
+// $html_src = mb_convert_encoding($ret,"HTML-ENTITIES","auto");
+// @$domDocument->loadHTML($html_src);
+// $xpath = new DOMXPath($domDocument);
+// var_test($xpath);
+
 // $xpath 
 
 // var_test($RSSinfo);
 
 // simplexml_load_string: XML文字列をオブジェクトに代入する
 $xml = simplexml_load_string($ret);
+var_test($xml);
 // MEMO:API内にある<channel>要素の中にある<item>要素から<title>要素を取得している
 foreach($xml->channel->item as $item) {
     echo (string)$item->title."\n";
